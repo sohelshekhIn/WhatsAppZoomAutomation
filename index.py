@@ -80,17 +80,28 @@ meetingId = ["123456789","123456123","123456321"]
 meetingPass = ["123456","654321","789456"]
 meetingStart = ["8:04","9:10","10:00"]
 meetingEnd = ["9:00","9:50","10:40"]
+meetingTiming =  ["8", "29","9","10","10","00"]
+status = True
 
-while True:
+while status:
+  timeH = int(datetime.datetime.now().strftime("%H"))
+  timeM = int(datetime.datetime.now().strftime("%M"))
   time = datetime.datetime.now().strftime("%H:%M")
-  if time >= meetingStart[0]:
-    timeId = 0
-  elif time >= meetingStart[1]:
-    timeId = 1
-  elif time >= meetingStart[2]:
-    timeId = 2
 
-  if datetime.datetime.now().strftime("%H:%M") == meetingStart[timeId]:
+  if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
+    zoomAttendMeeting()
+    status = False
+
+  elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
+    zoomAttendMeeting()
+    status = False
+
+  elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
+    zoomAttendMeeting()
+    status = False
+
+
+def zoomAttendMeeting():
     # Automating zoom
     os.startfile(ZOOM_PATH)
 
