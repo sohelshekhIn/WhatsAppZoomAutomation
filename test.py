@@ -45,11 +45,11 @@
 # # print(isinstance(meetingStart[0],int))
 # # print(isinstance(meetingStart[0],str))
 
-def hello():
-    print("Hello")
-    def start():
-        print("Start")
+# def hello():
+#     print("Hello")
+#     def start():
+#         print("Start")
 
 
-hello()
-start()
+import sys
+print(sys.getrecursionlimit)

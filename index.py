@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import psutil
 import datetime
@@ -9,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 
 # name = input("Paste exact name of user")
 name = "Class 10 C (20-21)"
+
 
 # WebDriver Path
 PATH = "C:\dev\chromedriver.exe"
@@ -88,15 +90,8 @@ meetingEndTwo = ["9","50"]
 meetingEndThree = ["10","40"]
 
 
-
-
-
-def zoomAttendMeeting(meetingCode):
-    # Automating zoom
-    os.startfile(ZOOM_PATH)
-    startAttendingMeeting(meetingCode)
-
 def startAttendingMeeting(meetingCode):
+  for i in range(len(meetingId)):
     time.sleep(10)
     if checkIfProcessRunning('zoom'):
         pyautogui.click(zoom_start_button[0], zoom_start_button[1])
@@ -146,6 +141,13 @@ def startAttendingMeeting(meetingCode):
                 pyautogui.keyUp('f4')
     else:
         pass
+
+def zoomAttendMeeting(meetingCode):
+    # Automating zoom
+    os.startfile(ZOOM_PATH)
+    startAttendingMeeting(meetingCode)
+
+
 
 def checkTiming():
   status = True
