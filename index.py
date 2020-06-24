@@ -74,25 +74,47 @@ def checkIfProcessRunning(processName):
 
 # meetingId = "4351864441"
 # password = "4441"
+
+
 meetingId = ["123456789","123456123","123456321"]
 meetingPass = ["123456","654321","789456"]
+meetingStart = ["8:04","9:10","10:00"]
+meetingEnd = ["9:00","9:50","10:40"]
 
-  # Automating zoom
-os.startfile(ZOOM_PATH)
+while True:
+  time = datetime.datetime.now().strftime("%H:%M")
+  if time >= meetingStart[0]:
+    timeId = 0
+  elif time >= meetingStart[1]:
+    timeId = 1
+  elif time >= meetingStart[2]:
+    timeId = 2
 
-for i in range(len(meetingId)):
-  time.sleep(10)
-  if checkIfProcessRunning('zoom'):
-      pyautogui.click(zoom_start_button[0], zoom_start_button[1])
-      time.sleep(5)
-      pyautogui.click(zoom_meeting_id[0],zoom_meeting_id[1])
-      pyautogui.write(meetingId[i])
-      pyautogui.click(zoom_turnOff_video_btn[0],zoom_turnOff_video_btn[1])
-      pyautogui.click(zoom_proceed_meeting_btn[0],zoom_proceed_meeting_btn[1])
-      time.sleep(3)
-      pyautogui.click(zoom_meeting_password[0],zoom_meeting_password[1])
-      pyautogui.write(meetingPass[i])
-      pyautogui.click(zoom_meeting_join_btn[0],zoom_meeting_join_btn[1])
+  if datetime.datetime.now().strftime("%H:%M") == meetingStart[timeId]:
+    # Automating zoom
+    os.startfile(ZOOM_PATH)
 
-  else:
-      pass
+    for i in range(len(meetingId)):
+      time.sleep(10)
+      if checkIfProcessRunning('zoom'):
+          pyautogui.click(zoom_start_button[0], zoom_start_button[1])
+          time.sleep(5)
+          pyautogui.click(zoom_meeting_id[0],zoom_meeting_id[1])
+          pyautogui.write(meetingId[i])
+          pyautogui.click(zoom_turnOff_video_btn[0],zoom_turnOff_video_btn[1])
+          pyautogui.click(zoom_proceed_meeting_btn[0],zoom_proceed_meeting_btn[1])
+          time.sleep(3)
+          pyautogui.click(zoom_meeting_password[0],zoom_meeting_password[1])
+          pyautogui.write(meetingPass[i])
+          pyautogui.click(zoom_meeting_join_btn[0],zoom_meeting_join_btn[1])
+          time.sleep(10)
+          while True:
+            time.sleep(30)
+            if datetime.datetime.now().strftime("%H:%M") == meetingEnd[i]:
+              pyautogui.keyDown('altleft')
+              pyautogui.keyDown('f4')
+              pyautogui.keyUp('altleft')
+              pyautogui.keyUp('f4')
+
+      else:
+          pass
