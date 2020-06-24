@@ -119,8 +119,16 @@ def zoomAttendMeeting(meetingCode):
                 pyautogui.keyDown('f4')
                 pyautogui.keyUp('altleft')
                 pyautogui.keyUp('f4')
+                pyautogui.keyDown('altleft')
+                pyautogui.keyDown('f4')
+                pyautogui.keyUp('altleft')
+                pyautogui.keyUp('f4')
               elif int(meetingCode) == 1:
                 if timeH == meetingEndTwo[0] and timeM == meetingEndTwo[1]:
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
                   pyautogui.keyDown('altleft')
                   pyautogui.keyDown('f4')
                   pyautogui.keyUp('altleft')
@@ -131,7 +139,10 @@ def zoomAttendMeeting(meetingCode):
                   pyautogui.keyDown('f4')
                   pyautogui.keyUp('altleft')
                   pyautogui.keyUp('f4')
-
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
       else:
           pass
 
@@ -145,27 +156,34 @@ def checkTiming():
       if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
         checkTiming()
         print("Meeting will start soon!")
-      else:        
-        zoomAttendMeeting(0)
-        status = False
+      else:
+        if checkIfProcessRunning('zoom'):
+          pass
+        else:
+          zoomAttendMeeting(0)
+          status = False
 
     elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
       if timeH >= int(meetingEnd[2]) and timeM >= int(meetingEnd[3]):
         print("Meeting will start soon!")
         checkTiming()
-      else:        
-        zoomAttendMeeting(1)
-        status = False
+      else:
+        if checkIfProcessRunning('zoom'):
+          pass
+        else:      
+          zoomAttendMeeting(1)
+          status = False
 
     elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
       if timeH >= int(meetingEnd[4]) and timeM >= int(meetingEnd[5]):
         print("Meeting will start soon!")
         checkTiming()
-      else:        
-        zoomAttendMeeting(2)
-        status = False
-
-
+      else:
+        if checkIfProcessRunning('zoom'):
+          pass
+        else:
+          zoomAttendMeeting(2)
+          status = False
 
 
 
