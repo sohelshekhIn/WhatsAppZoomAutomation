@@ -11,7 +11,6 @@ from selenium.webdriver.chrome.options import Options
 # name = input("Paste exact name of user")
 name = "Class 10 C (20-21)"
 
-
 # WebDriver Path
 PATH = "C:\dev\chromedriver.exe"
 PROFILE = "C:\\Users\\sohel\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
@@ -89,63 +88,61 @@ meetingEndOne = ["9","00"]
 meetingEndTwo = ["9","50"]
 meetingEndThree = ["10","40"]
 
-
-def startAttendingMeeting(meetingCode):
-  for i in range(len(meetingId)):
-    time.sleep(10)
-    if checkIfProcessRunning('zoom'):
-        pyautogui.click(zoom_start_button[0], zoom_start_button[1])
-        time.sleep(5)
-        pyautogui.click(zoom_meeting_id[0],zoom_meeting_id[1])
-        pyautogui.write(meetingId[int(meetingCode)])
-        pyautogui.click(zoom_turnOff_video_btn[0],zoom_turnOff_video_btn[1])
-        pyautogui.click(zoom_proceed_meeting_btn[0],zoom_proceed_meeting_btn[1])
-        time.sleep(3)
-        pyautogui.click(zoom_meeting_password[0],zoom_meeting_password[1])
-        pyautogui.write(meetingPass[int(meetingCode)])
-        pyautogui.click(zoom_meeting_join_btn[0],zoom_meeting_join_btn[1])
-        time.sleep(10)
-        while True:
-          timeH = int(datetime.datetime.now().strftime("%H"))
-          timeM = int(datetime.datetime.now().strftime("%M"))
-          time.sleep(30)
-          if int(meetingCode) == 0:
-            if timeH == meetingEndOne[0] and timeM == meetingEndOne[1]:
-              pyautogui.keyDown('altleft')
-              pyautogui.keyDown('f4')
-              pyautogui.keyUp('altleft')
-              pyautogui.keyUp('f4')
-              pyautogui.keyDown('altleft')
-              pyautogui.keyDown('f4')
-              pyautogui.keyUp('altleft')
-              pyautogui.keyUp('f4')
-            elif int(meetingCode) == 1:
-              if timeH == meetingEndTwo[0] and timeM == meetingEndTwo[1]:
-                pyautogui.keyDown('altleft')
-                pyautogui.keyDown('f4')
-                pyautogui.keyUp('altleft')
-                pyautogui.keyUp('f4')
-                pyautogui.keyDown('altleft')
-                pyautogui.keyDown('f4')
-                pyautogui.keyUp('altleft')
-                pyautogui.keyUp('f4')
-            elif int(meetingCode) == 2:
-              if timeH == meetingEndThree[0] and timeM == meetingEndThree[1]:
-                pyautogui.keyDown('altleft')
-                pyautogui.keyDown('f4')
-                pyautogui.keyUp('altleft')
-                pyautogui.keyUp('f4')
-                pyautogui.keyDown('altleft')
-                pyautogui.keyDown('f4')
-                pyautogui.keyUp('altleft')
-                pyautogui.keyUp('f4')
-    else:
-        pass
-
-def zoomAttendMeeting(meetingCode):
+def zoomAttendMeeting(meetingCode,startStatus):
     # Automating zoom
-    os.startfile(ZOOM_PATH)
-    startAttendingMeeting(meetingCode)
+    if startStatus:
+      os.startfile(ZOOM_PATH)
+
+    for i in range(len(meetingId)):
+      time.sleep(10)
+      if checkIfProcessRunning('zoom'):
+          pyautogui.click(zoom_start_button[0], zoom_start_button[1])
+          time.sleep(5)
+          pyautogui.click(zoom_meeting_id[0],zoom_meeting_id[1])
+          pyautogui.write(meetingId[int(meetingCode)])
+          pyautogui.click(zoom_turnOff_video_btn[0],zoom_turnOff_video_btn[1])
+          pyautogui.click(zoom_proceed_meeting_btn[0],zoom_proceed_meeting_btn[1])
+          time.sleep(3)
+          pyautogui.click(zoom_meeting_password[0],zoom_meeting_password[1])
+          pyautogui.write(meetingPass[int(meetingCode)])
+          pyautogui.click(zoom_meeting_join_btn[0],zoom_meeting_join_btn[1])
+          time.sleep(10)
+          while True:
+            timeH = int(datetime.datetime.now().strftime("%H"))
+            timeM = int(datetime.datetime.now().strftime("%M"))
+            time.sleep(30)
+            if int(meetingCode) == 0:
+              if timeH == meetingEndOne[0] and timeM == meetingEndOne[1]:
+                pyautogui.keyDown('altleft')
+                pyautogui.keyDown('f4')
+                pyautogui.keyUp('altleft')
+                pyautogui.keyUp('f4')
+                pyautogui.keyDown('altleft')
+                pyautogui.keyDown('f4')
+                pyautogui.keyUp('altleft')
+                pyautogui.keyUp('f4')
+              elif int(meetingCode) == 1:
+                if timeH == meetingEndTwo[0] and timeM == meetingEndTwo[1]:
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
+              elif int(meetingCode) == 2:
+                if timeH == meetingEndThree[0] and timeM == meetingEndThree[1]:
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
+      else:
+          pass
 
 
 
@@ -161,9 +158,9 @@ def checkTiming():
         print("Meeting will start soon!")
       else:
         if checkIfProcessRunning('zoom'):
-          startAttendingMeeting(0)
+          zoomAttendMeeting(0,False)
         else:
-          zoomAttendMeeting(0)
+          zoomAttendMeeting(0, True)
           status = False
 
     elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
@@ -172,9 +169,9 @@ def checkTiming():
         checkTiming()
       else:
         if checkIfProcessRunning('zoom'):
-          startAttendingMeeting(1)
+          zoomAttendMeeting(1,False)
         else:      
-          zoomAttendMeeting(1)
+          zoomAttendMeeting(1,True)
           status = False
 
     elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
@@ -183,9 +180,9 @@ def checkTiming():
         checkTiming()
       else:
         if checkIfProcessRunning('zoom'):
-          startAttendingMeeting(2)
+          zoomAttendMeeting(2,False)
         else:
-          zoomAttendMeeting(2)
+          zoomAttendMeeting(2,True)
           status = False
 
 
