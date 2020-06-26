@@ -5,7 +5,7 @@ import atexit
 import psutil
 import datetime
 import pyautogui
-
+zoom_path = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
 setUpStatus = pickle.load(open("data.dat", "rb"))
 
 if setUpStatus == "INITIALIZE":
@@ -14,11 +14,16 @@ if setUpStatus == "INITIALIZE":
   print("")
   print("")
   print("Refer documentation in GitHub")
+  print("")
+  print("")
+  print("Search for the file in your system with your user! (in double backward slaches): ")
+  print(zoom_path)
   pathO = input("Enter app location of zoom:")
   print(pathO)
   print("")
   print("Ending Initialize...")
   pickle.dump(pathO, open("data.dat", "wb"))
+  zoom_path = pathO
 
 
 lect = []
@@ -31,7 +36,6 @@ lectureSubjject = ["maths", "hindi", "pe", "it", "eng_lr", "eng_gr", "ss_ks", "s
 lectureMeetingId = ["4351864441", "9729663083", "3020221759", "2298966093", "3335982496", "7155941385","2086408197", "2932997323","8975302030","8011052266"]
 lectureMeetingPass = ["4441","123456","12345","150620","434241","978714","208208","860837","286080","226476"]
 
-ZOOM_PATH = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
 
 
 # zoom pixel info/config
@@ -110,7 +114,7 @@ meetingEndFour = ["11", "30"]
 def zoomAttendMeeting(meetingCode,startStatus):
     # Automating zoom
     if startStatus:
-      os.startfile(ZOOM_PATH)
+      os.startfile(zoom_path)
 
     for i in range(len(meetingId)):
       time.sleep(10)

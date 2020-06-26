@@ -111,10 +111,10 @@
 
 
 
-import pickle
+# import pickle
 
-setUPData = pickle.load(open("data.dat", "rb"))
-print(setUPData)
+# setUPData = pickle.load(open("data.dat", "rb"))
+# print(setUPData)
 
 # if setUPData == "INITIALIZE":
 #     setup = input("Done: ")
@@ -239,3 +239,24 @@ print(setUPData)
 
 # print(meetingId,meetingPass)
 
+# "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
+# response = input("Enter: ")
+# response.replace("\", "\\")
+# print(response)
+zoom_path = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
+
+print("")
+print("Initializing setup")
+print("")
+print("")
+print("Refer documentation in GitHub")
+print("")
+print("")
+print("Search for the file in your system with your user! (in double backward slaches): ")
+print(zoom_path)
+pathO = input("Enter app location of zoom:")
+print(pathO)
+print("")
+print("Ending Initialize...")
+pickle.dump(pathO, open("data.dat", "wb"))
+zoom_path = pathO
