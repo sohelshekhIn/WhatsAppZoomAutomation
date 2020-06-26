@@ -101,10 +101,11 @@
 
 # print(SubjectCode["it"]["id"])
 
-no_lectures = input("No. of lect")
+no_lectures = input("No. of lect: ")
 lect =  []
 
-for i in range(no_lectures):
-  lect.append(input("Lecture "+ i))
+for i in range(int(no_lectures)):
+  lect.append(input("Lecture "+ str(i+1) + ": "))
 
-print(lect)
+print(str(lect.lower()
+))

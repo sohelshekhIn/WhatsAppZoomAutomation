@@ -4,10 +4,6 @@ import psutil
 import datetime
 import pyautogui
 
-meetingId = ["7155941385","4351864441", "2298966093"]
-meetingPass = ["978714", "4441", "150260"]
-
-
 SubjectCode = {
   "maths": {
     "id": "4351864441",
@@ -51,15 +47,7 @@ SubjectCode = {
   }
 }
 
-
-no_lectures = input("number of lectures: ")
 lect = []
-
-for i in range(no_lectures):
-  lect.append(input("Lecture "+ i))
-   
-
-
 ZOOM_PATH = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
 
 
@@ -86,7 +74,15 @@ def checkIfProcessRunning(processName):
             pass
     return False;
   
+def LectureToId(lectures):
+  lectures = lectures.lower()
+  
 
+
+no_lectures = input("number of lectures: ")
+for i in range(int(no_lectures)):
+  lect.append(input("Lecture "+ str(i+1) + ": "))
+   
 
 
 meetingStart =  ["8", "20","9","10","10","00"]
@@ -96,6 +92,11 @@ meetingEndOne = ["9","00"]
 meetingEndTwo = ["9","50"]
 meetingEndThree = ["10","40"]
 meetingEndFour = ["11", "30"]
+
+
+meetingId = ["7155941385","4351864441", "2298966093"]
+meetingPass = ["978714", "4441", "150260"]
+
 
 
 def zoomAttendMeeting(meetingCode,startStatus):
