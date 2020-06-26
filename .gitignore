@@ -2,5 +2,5 @@
 /debug.log
 /__pychache__
 /.vscode
-/test.json
-/test.py
+test.json
+test.py
