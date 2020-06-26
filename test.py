@@ -166,8 +166,11 @@ SubjectCode = {
 }
 lect = []
 
-for ii in range(len(SubjectCode)):
-    print(SubjectCode)
+# for ii in range(len(SubjectCode)):
+#     pass
+
+
+print(SubjectCode.items()["pt"])
 
 # def LectureToId(lectures):
 #   for i in range(len(lectures)):
