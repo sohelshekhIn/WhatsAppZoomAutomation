@@ -1,13 +1,60 @@
 import os
-import sys
 import time
 import psutil
 import datetime
 import pyautogui
 
 
-# name = input("Paste exact name of user")
-name = "Class 10 C (20-21)"
+SubjectCode = {
+  "maths":{
+    "id":"4351864441",
+    "pass":"4441"
+  },
+  "hindi":{
+    "id":"9729663083",
+    "pass":"123456"
+  },
+  "pe":{
+    "id":"3020221759",
+    "pass":"12345"
+  },
+  "it":{
+    "id":"2298966093",
+    "pass":"150620"
+  },
+  "english":{
+    "lr":{
+      "id":"3335982496",
+      "pass":"434241"
+    },
+    "gr":{
+      "id":"7155941385",
+      "pass":"978714"
+    }
+  },
+  "ss":{
+    "ks":{
+      "id":"2086408197",
+      "pass":"208208"
+    },
+    "geo":{
+      "id":"2932997323",
+      "pass":"860837"
+    }
+  },
+  "sci":{
+    "sm":{
+      "id":"8975302030",
+      "pass":"286080"
+    },
+  "am":{
+    "id":"8011052266",
+    "pass":"226476"
+    }
+  }
+}
+
+
 no_lectures = input("number of lectures: ")
 
 if no_lectures ==1:
@@ -25,10 +72,6 @@ elif no_lectures ==4:
   lect3 = input("Lecture 3: ")
   lect4 = input("Lecture 4: ")
 
-# WebDriver Path
-# PATH = "C:\dev\chromedriver.exe"
-# PROFILE = "C:\\Users\\sohel\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
-# msgXPath ="//*[@id='main']/div[3]/div/div/div[3]/div[7]/div/div/div/div[2]/div/span[1]/span"
 
 
 ZOOM_PATH = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
@@ -56,23 +99,6 @@ def checkIfProcessRunning(processName):
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
     return False;
-
-# # meetingId = "744 1278 6077"
-# # password = "7GWX3M"
-
-
-SubjectCode = {
-  "maths":{
-    "id":"4351864441",
-    "pass":"4441"
-  },
-  "hindi":{
-    "id":"9729663083",
-    "pass":"123456"
-  }
-}
-
-
 
 
 
