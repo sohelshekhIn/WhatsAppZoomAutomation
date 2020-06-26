@@ -4,18 +4,34 @@ import time
 import psutil
 import datetime
 import pyautogui
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+
 
 # name = input("Paste exact name of user")
 name = "Class 10 C (20-21)"
+no_lectures = input("number of lectures: ")
+
+if no_lectures ==1:
+  lect1 = input("Subject: ")
+elif no_lectures ==2:
+  lect1 = input("Lecture 1: ")
+  lect2 = input("Lecture 2: ")
+elif no_lectures ==3:
+  lect1 = input("Lecture 1: ")
+  lect2 = input("Lecture 2: ")
+  lect3 = input("Lecture 3: ")
+elif no_lectures ==4:
+  lect1 = input("Lecture 1: ")
+  lect2 = input("Lecture 2: ")
+  lect3 = input("Lecture 3: ")
+  lect4 = input("Lecture 4: ")
 
 # WebDriver Path
-PATH = "C:\dev\chromedriver.exe"
-PROFILE = "C:\\Users\\sohel\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
+# PATH = "C:\dev\chromedriver.exe"
+# PROFILE = "C:\\Users\\sohel\\AppData\\Local\\Google\\Chrome\\User Data\\Default"
+# msgXPath ="//*[@id='main']/div[3]/div/div/div[3]/div[7]/div/div/div/div[2]/div/span[1]/span"
+
+
 ZOOM_PATH = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
-msgXPath ="//*[@id='main']/div[3]/div/div/div[3]/div[7]/div/div/div/div[2]/div/span[1]/span"
 
 
 # zoom pixel info/config
@@ -25,35 +41,6 @@ zoom_turnOff_video_btn = (804,646)
 zoom_proceed_meeting_btn = (990,679)
 zoom_meeting_password = (840,486)
 zoom_meeting_join_btn = (969,685)
-
-
-# # selenium config
-# options = webdriver.ChromeOptions() 
-# options.add_argument(r"user-data-dir="+PROFILE) #Path to your chrome profile
-# driver = webdriver.Chrome(executable_path=PATH, chrome_options=options)
-# # Whatsapp Site Link
-# whatsAppLink = "https://web.whatsapp.com"
-# driver.maximize_window()
-# driver.get(whatsAppLink)
-# time.sleep(8) #So whatsapp can load
-# user = driver.find_element_by_xpath(f'//span[@title = "{name}"]')
-# user.click()
-# try:
-#     msg = driver.find_element_by_xpath(msgXPath)
-#     msg = msg.text
-
-#     if "Please find the details of the Virtual Class for tomorrow" in msg:
-#       print("Yes, it is")
-#     else:
-#       print("no")
-# except Exception as e:
-#     if "Message: no such element: Unable to locate element" in e:
-#         print("Element not found")
-#         exit(0)
-
-# div[7] describes the msg length
-# time.sleep(555000)
-
 
 
 def checkIfProcessRunning(processName):
@@ -73,20 +60,33 @@ def checkIfProcessRunning(processName):
 # # meetingId = "744 1278 6077"
 # # password = "7GWX3M"
 
-# meetingId = "4351864441"
-# password = "4441"
-# meetingStart = ["8:04","9:10","10:00"]
 
-meetingId = ["7155941385","4351864441", "9729663083"]
-meetingPass = ["978714", "4441", "123456"]
+SubjectCode = {
+  "maths":{
+    "id":"4351864441",
+    "pass":"4441"
+  },
+  "hindi":{
+    "id":"9729663083",
+    "pass":"123456"
+  }
+}
+
+
+
+
+
+meetingId = ["7155941385","4351864441", "2298966093"]
+meetingPass = ["978714", "4441", "150260"]
 
 meetingStart =  ["8", "20","9","10","10","00"]
 meetingEnd = ["9","00","9","50","10","40"]
 
-
 meetingEndOne = ["9","00"]
 meetingEndTwo = ["9","50"]
 meetingEndThree = ["10","40"]
+meetingEndFour = ["11", "30"]
+
 
 def zoomAttendMeeting(meetingCode,startStatus):
     # Automating zoom
@@ -141,6 +141,16 @@ def zoomAttendMeeting(meetingCode,startStatus):
                   pyautogui.keyDown('f4')
                   pyautogui.keyUp('altleft')
                   pyautogui.keyUp('f4')
+              elif int(meetingCode) == 3:
+                if timeH == meetingEndFour[0] and timeM == meetingEndFour[1]:
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
+                  pyautogui.keyDown('altleft')
+                  pyautogui.keyDown('f4')
+                  pyautogui.keyUp('altleft')
+                  pyautogui.keyUp('f4')
       else:
           pass
 
@@ -152,10 +162,11 @@ def checkTiming():
     timeH = int(datetime.datetime.now().strftime("%H"))
     timeM = int(datetime.datetime.now().strftime("%M"))
 
-    if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
-      if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
-        checkTiming()
-        print("Meeting will start soon!")
+    if no_lectures == 1:
+      if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
+        if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
+          checkTiming()
+          print("Meeting will start soon!")
       else:
         if checkIfProcessRunning('zoom'):
           zoomAttendMeeting(0,False)
@@ -163,27 +174,104 @@ def checkTiming():
           zoomAttendMeeting(0, True)
           status = False
 
-    elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
-      if timeH >= int(meetingEnd[2]) and timeM >= int(meetingEnd[3]):
-        print("Meeting will start soon!")
-        checkTiming()
-      else:
-        if checkIfProcessRunning('zoom'):
-          zoomAttendMeeting(1,False)
-        else:      
-          zoomAttendMeeting(1,True)
-          status = False
-
-    elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
-      if timeH >= int(meetingEnd[4]) and timeM >= int(meetingEnd[5]):
-        print("Meeting will start soon!")
-        checkTiming()
-      else:
-        if checkIfProcessRunning('zoom'):
-          zoomAttendMeeting(2,False)
+    elif no_lectures == 2:
+      if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
+        if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
+          checkTiming()
+          print("Meeting will start soon!")
         else:
-          zoomAttendMeeting(2,True)
-          status = False
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(0,False)
+          else:
+            zoomAttendMeeting(0, True)
+            status = False
+
+      elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
+        if timeH >= int(meetingEnd[2]) and timeM >= int(meetingEnd[3]):
+          print("Meeting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(1,False)
+          else:      
+            zoomAttendMeeting(1,True)
+            status = False
+
+    elif no_lectures == 3:
+      if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
+        if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
+          checkTiming()
+          print("Meeting will start soon!")
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(0,False)
+          else:
+            zoomAttendMeeting(0, True)
+            status = False
+
+      elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
+        if timeH >= int(meetingEnd[2]) and timeM >= int(meetingEnd[3]):
+          print("Meeting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(1,False)
+          else:      
+            zoomAttendMeeting(1,True)
+            status = False
+      elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
+        if timeH >= int(meetingEnd[4]) and timeM >= int(meetingEnd[5]):
+          print("Meeting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(2,False)
+          else:
+            zoomAttendMeeting(2,True)
+            status = False
+    elif no_lectures == 4:
+      if int(timeH) >=  int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
+        if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
+          checkTiming()
+          print("Meeting will start soon!")
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(0,False)
+          else:
+            zoomAttendMeeting(0, True)
+            status = False
+
+      elif int(timeH) >=  int(meetingStart[2]) and int(timeM) >= int(meetingStart[3]):
+        if timeH >= int(meetingEnd[2]) and timeM >= int(meetingEnd[3]):
+          print("Meeting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(1,False)
+          else:      
+            zoomAttendMeeting(1,True)
+            status = False
+      elif int(timeH) >=  int(meetingStart[4]) and int(timeM) >= int(meetingStart[5]):
+        if timeH >= int(meetingEnd[4]) and timeM >= int(meetingEnd[5]):
+          print("Meeting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(2,False)
+          else:
+            zoomAttendMeeting(2,True)
+            status = False
+      elif int(timeH) >= int(meetingStart[6]) and int(timeM) >= int(meetingStart[7]):
+        if timeH >= int(meetingEnd[6] and timeM >= int(meetingEnd[7])):
+          print("Metting will start soon!")
+          checkTiming()
+        else:
+          if checkIfProcessRunning('zoom'):
+            zoomAttendMeeting(3,False)
+          else:
+            zoomAttendMeeting(3,True)
+            status = False
+          
 
 
 
