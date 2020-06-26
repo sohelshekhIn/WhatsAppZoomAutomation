@@ -1,8 +1,24 @@
 import os
 import time
+import pickle
+import atexit
 import psutil
 import datetime
 import pyautogui
+
+setUpStatus = pickle.load(open("data.dat", "rb"))
+
+if setUpStatus == "INITIALIZE":
+  print("")
+  print("Initializing setup")
+  print("")
+  print("")
+  print("Refer documentation in GitHub")
+  pathO = input("Enter app location of zoom:")
+  print(pathO)
+  print("")
+  print("Ending Initialize...")
+  pickle.dump(pathO, open("data.dat", "wb"))
 
 
 lect = []
@@ -279,3 +295,19 @@ def checkTiming():
 
 
 checkTiming()
+
+def exiting():
+  if len(meetingId) >= 2:
+    response = input("Do you  want to exit (y/n): ")
+    if response.lower() == "y":
+      print("You will required to enter details again when restart!")
+      print("Exiting...")
+      time.sleep(5)
+      os._exit(0)
+  else:
+    print("Exiting in 3s")
+    time.sleep(3)
+    os._exit(0)
+    
+
+atexit.register(exiting)
