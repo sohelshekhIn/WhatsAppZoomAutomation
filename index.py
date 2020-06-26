@@ -11,19 +11,40 @@ setUpStatus = pickle.load(open("data.dat", "rb"))
 if setUpStatus == "INITIALIZE":
   print("")
   print("Initializing setup")
-  print("")
-  print("")
+  time.sleep(2)
+  print(".")
+  time.sleep(1)
+  print("..")
+  time.sleep(1.5)
+  print("...")
+  time.sleep(1.5)
   print("Refer documentation in GitHub")
-  print("")
-  print("")
+  print(".")
+  time.sleep(3)
+  print(".")
+  time.sleep(3)
   print("Search for the file in your system with your user! (in double backward slaches): ")
+  time.sleep(2)
   print(zoom_path)
+  time.sleep(3)
   pathO = input("Enter app location of zoom:")
   print(pathO)
   print("")
+  time.sleep(3)
   print("Ending Initialize...")
-  pickle.dump(pathO, open("data.dat", "wb"))
+  pickle.dump(pathO, open("zoom.dat", "wb"))
   zoom_path = pathO
+
+
+try:
+  zoPath = pickle.load(open("zoom.dat","rb"))
+except FileNotFoundError:
+  print("")
+  print("Error zoom.dat file not found, re-install it from GitHub to solve issue!")
+  print("")
+  print("Exiting...")
+  os._exit(0)
+  
 
 
 lect = []
@@ -63,44 +84,65 @@ def checkIfProcessRunning(processName):
 
   
 def LectureToId(lectures):
-  for i in range(len(lectures)):
-    for ii in range(len(lectureSubjject)):
-        if lectures[i].lower() in lectureSubjject[ii]:
-            meetingId.append(lectureMeetingId[ii])
-            meetingPass.append(lectureMeetingPass[ii])
-        elif lectures[i].lower() in "english":
-            lastDigit = input("Enter first three digit of English's Meeting Id: ")
-            if lastDigit == "333":
-              meetingId.append(lectureMeetingId[4])
-              meetingPass.append(lectureMeetingPass[4])             
-            else:
-              meetingId.append(lectureMeetingId[5])
-              meetingPass.append(lectureMeetingPass[5])
-        elif lectures[i].lower() in "science":
-            lastDigit = input("Enter first three digit of Science's Meeting Id: ")
-            if lastDigit == "897":
-              meetingId.append(lectureMeetingId[10])
-              meetingPass.append(lectureMeetingPass[10])
-            else:
-              meetingId.append(lectureMeetingId[11])
-              meetingPass.append(lectureMeetingPass[11])
-        elif lectures[i].lower() in "ss":
-            lastDigit = input("Enter first three digit of S.S's Meeting Id: ")
-            if lastDigit == "208":
-              meetingId.append(lectureMeetingId[8])
-              meetingPass.append(lectureMeetingPass[8])
-            else:
-              meetingId.append(lectureMeetingId[9])
-              meetingPass.append(lectureMeetingPass[9])
+    if lectures[i].lower() in "english":
+        lastDigit = input("Enter first three digit of English's Meeting Id: ")
+        if lastDigit in "333":
+            meetingId.append(lectureMeetingId[4])
+            meetingPass.append(lectureMeetingPass[4])             
+        elif lastDigit in "715":
+            meetingId.append(lectureMeetingId[5])
+            meetingPass.append(lectureMeetingPass[5])
+    elif lectures[i].lower() in "science":
+        lastDigit = input("Enter first three digit of Science's Meeting Id: ")
+        if lastDigit in "897":
+            meetingId.append(lectureMeetingId[10])
+            meetingPass.append(lectureMeetingPass[10])
+        elif lastDigit in "801":
+            meetingId.append(lectureMeetingId[11])
+            meetingPass.append(lectureMeetingPass[11])
+    elif lectures[i].lower() in "ss":
+        lastDigit = input("Enter first three digit of S.S's Meeting Id: ")
+        if lastDigit in "208":
+            meetingId.append(lectureMeetingId[8])
+            meetingPass.append(lectureMeetingPass[8])
+        elif lastDigit in "293":
+            meetingId.append(lectureMeetingId[9])
+            meetingPass.append(lectureMeetingPass[9])
+    elif lectures[i].lower() in "hindi":
+        meetingId.append(lectureMeetingId[1])
+        meetingPass.append(lectureMeetingPass[1])
+    elif lectures[i].lower() in "maths":
+        meetingId.append(lectureMeetingId[0])
+        meetingPass.append(lectureMeetingPass[0])
+    elif lectures[i].lower() in "pe":
+        meetingId.append(lectureMeetingId[2])
+        meetingPass.append(lectureMeetingPass[2])
+    elif lectures[i].lower() in "it":
+        meetingId.append(lectureMeetingId[3])
+        meetingPass.append(lectureMeetingPass[3])
+    else:
+        print("Enter valid answer!")
+
+
  
-
-
+print("")
+print("")
+print("Please Wait...")
+print("")
 
 no_lectures = input("Number of lectures: ")
 for i in range(int(no_lectures)):
-  lect.append(input(str(i+1) + "st lecture: "))
-  
-LectureToId(lect)
+    if i+1 == 1:
+      pos = "st"
+    elif i+1 == 2:
+      pos = "nd"
+    elif i+1 == 3:
+      pos = "rd"
+    elif i+1 == 4:
+        pos = "rth"
+
+    lect.append(input(str(i+1) + pos + " lecture: ")) 
+    LectureToId(lect)
 
 
 meetingStart =  ["8", "20","9","10","10","00"]
@@ -299,7 +341,6 @@ def checkTiming():
 
 
 checkTiming()
-
 def exiting():
   if len(meetingId) >= 2:
     response = input("Do you  want to exit (y/n): ")
