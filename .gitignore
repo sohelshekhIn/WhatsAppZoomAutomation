@@ -1,2 +1,6 @@
 /.autogit
 /debug.log
+/__pychache__
+/.vscode
+/test.json
+/test.py

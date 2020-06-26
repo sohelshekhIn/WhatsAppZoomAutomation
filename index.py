@@ -75,8 +75,10 @@ def checkIfProcessRunning(processName):
     return False;
   
 def LectureToId(lectures):
-  lectures = lectures.lower()
-  
+  for i in range(len(lectures)):
+    for ii in range(len(SubjectCode)):
+      if lectures[i] in SubjectCode[ii]:
+        print(SubjectCode[ii],SubjectCode[ii][id])
 
 
 no_lectures = input("number of lectures: ")
