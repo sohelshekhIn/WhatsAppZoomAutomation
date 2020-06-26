@@ -50,6 +50,61 @@
 #     def start():
 #         print("Start")
 
+# SubjectCode = {
+#   "maths":{
+#     "id":"4351864441",
+#     "pass":"4441"
+#   },
+#   "hindi":{
+#     "id":"9729663083",
+#     "pass":"123456"
+#   },
+#   "pe":{
+#     "id":"3020221759",
+#     "pass":"12345"
+#   },
+#   "it":{
+#     "id":"2298966093",
+#     "pass":"150620"
+#   },
+#   "english":{
+#     "lr":{
+#       "id":"3335982496",
+#       "pass":"434241"
+#     },
+#     "gr":{
+#       "id":"7155941385",
+#       "pass":"978714"
+#     }
 
-import sys
-print(sys.getrecursionlimit())
+#   },
+#   "ss":{
+#     "ks":{
+#       "id":"2086408197",
+#       "pass":"208208"
+#     },
+#     "geo":{
+#       "id":"2932997323",
+#       "pass":"860837"
+#     }
+#   },
+#     "sci_sm":{
+#       "id":"8975302030",
+#       "pass":"286080"
+#     },
+#   "sci_am":{
+#     "id":"8011052266",
+#     "pass":"226476"
+#     }
+  
+# }
+
+# print(SubjectCode["it"]["id"])
+
+no_lectures = input("No. of lect")
+lect =  []
+
+for i in range(no_lectures):
+  lect.append(input("Lecture "+ i))
+
+print(lect)

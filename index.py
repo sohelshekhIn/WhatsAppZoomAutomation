@@ -4,74 +4,60 @@ import psutil
 import datetime
 import pyautogui
 
+meetingId = ["7155941385","4351864441", "2298966093"]
+meetingPass = ["978714", "4441", "150260"]
+
 
 SubjectCode = {
-  "maths":{
-    "id":"4351864441",
-    "pass":"4441"
+  "maths": {
+    "id": "4351864441",
+    "pass": "4441"
   },
-  "hindi":{
-    "id":"9729663083",
-    "pass":"123456"
+  "hindi": {
+    "id": "9729663083",
+    "pass": "123456"
   },
-  "pe":{
-    "id":"3020221759",
-    "pass":"12345"
+  "pe": {
+    "id": "3020221759",
+    "pass": "12345"
   },
-  "it":{
-    "id":"2298966093",
-    "pass":"150620"
+  "it": {
+    "id": "2298966093",
+    "pass": "150620"
   },
-  "english":{
-    "lr":{
-      "id":"3335982496",
-      "pass":"434241"
-    },
-    "gr":{
-      "id":"7155941385",
-      "pass":"978714"
-    }
+  "eng_lr": {
+    "id": "3335982496",
+    "pass": "434241"
   },
-  "ss":{
-    "ks":{
-      "id":"2086408197",
-      "pass":"208208"
-    },
-    "geo":{
-      "id":"2932997323",
-      "pass":"860837"
-    }
+  "eng_gr": {
+    "id": "7155941385",
+    "pass": "978714"
   },
-  "sci":{
-    "sm":{
-      "id":"8975302030",
-      "pass":"286080"
-    },
-  "am":{
-    "id":"8011052266",
-    "pass":"226476"
-    }
+  "ss_ks": {
+    "id": "2086408197",
+    "pass": "208208"
+  },
+  "ss_geo": {
+    "id": "2932997323",
+    "pass": "860837"
+  },
+  "sci_sm": {
+    "id": "8975302030",
+    "pass": "286080"
+  },
+  "sci_am": {
+    "id": "8011052266",
+    "pass": "226476"
   }
 }
 
 
 no_lectures = input("number of lectures: ")
+lect = []
 
-if no_lectures ==1:
-  lect1 = input("Subject: ")
-elif no_lectures ==2:
-  lect1 = input("Lecture 1: ")
-  lect2 = input("Lecture 2: ")
-elif no_lectures ==3:
-  lect1 = input("Lecture 1: ")
-  lect2 = input("Lecture 2: ")
-  lect3 = input("Lecture 3: ")
-elif no_lectures ==4:
-  lect1 = input("Lecture 1: ")
-  lect2 = input("Lecture 2: ")
-  lect3 = input("Lecture 3: ")
-  lect4 = input("Lecture 4: ")
-
+for i in range(no_lectures):
+  lect.append(input("Lecture "+ i))
+   
 
 
 ZOOM_PATH = "C:\\Users\\sohel\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe"
@@ -99,11 +85,9 @@ def checkIfProcessRunning(processName):
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
     return False;
+  
 
 
-
-meetingId = ["7155941385","4351864441", "2298966093"]
-meetingPass = ["978714", "4441", "150260"]
 
 meetingStart =  ["8", "20","9","10","10","00"]
 meetingEnd = ["9","00","9","50","10","40"]
