@@ -52,6 +52,7 @@ except FileNotFoundError:
 
 
 lect = []
+userLectures = []
 meetingId = []
 meetingPass = []
 
@@ -92,37 +93,47 @@ def LectureToId(lectures):
     if lectures[i].lower() in "english":
         lastDigit = input("Enter first three digit of English's Meeting Id: ")
         if lastDigit in "333":
+            userLectures.append("Dipali Patel Mam's")
             meetingId.append(lectureMeetingId[4])
             meetingPass.append(lectureMeetingPass[4])
         elif lastDigit in "715":
+            userLectures.append("Chetna Mehta Mam's")
             meetingId.append(lectureMeetingId[5])
             meetingPass.append(lectureMeetingPass[5])
     elif lectures[i].lower() in "science":
         lastDigit = input("Enter first three digit of Science's Meeting Id: ")
         if lastDigit in "897":
+            userLectures.append("Sangeeta Mam's")
             meetingId.append(lectureMeetingId[8])
             meetingPass.append(lectureMeetingPass[8])
         elif lastDigit in "801":
+            userLectures.append("Anupriya Mam's")
             meetingId.append(lectureMeetingId[9])
             meetingPass.append(lectureMeetingPass[9])
     elif lectures[i].lower() in "ss":
         lastDigit = input("Enter first three digit of S.S's Meeting Id: ")
         if lastDigit in "208":
+            userLectures.append("Kalpesh Sir's")
             meetingId.append(lectureMeetingId[6])
             meetingPass.append(lectureMeetingPass[6])
         elif lastDigit in "293":
+            userLectures.append("Nirali Mam's")
             meetingId.append(lectureMeetingId[7])
             meetingPass.append(lectureMeetingPass[7])
     elif lectures[i].lower() in "hindi":
+        userLectures.append("Anita Mam's")
         meetingId.append(lectureMeetingId[1])
         meetingPass.append(lectureMeetingPass[1])
     elif lectures[i].lower() in "maths":
+        userLectures.append("Bharat Sir's")
         meetingId.append(lectureMeetingId[0])
         meetingPass.append(lectureMeetingPass[0])
     elif lectures[i].lower() in "pe":
+        userLectures.append("Dipali Trivedi Mam's")
         meetingId.append(lectureMeetingId[2])
         meetingPass.append(lectureMeetingPass[2])
     elif lectures[i].lower() in "it":
+        userLectures.append("Smruti Mam's")
         meetingId.append(lectureMeetingId[3])
         meetingPass.append(lectureMeetingPass[3])
     else:
@@ -145,6 +156,10 @@ for i in range(int(no_lectures)):
 
     lect.append(input(str(i+1) + pos + " lecture: "))
     LectureToId(lect)
+print("")
+print("")
+print("Todays lectures are: ")
+print(userLectures)
 
 
 meetingStart = ["8", "20", "9", "10", "10", "00"]
@@ -229,13 +244,14 @@ def zoomAttendMeeting(meetingCode, startStatus):
 
 def checkTiming():
     status = True
-    print("Checking Timing")
+    print("")
+    print("             Checking Timing...")
     print("")
     while status:
         timeH = int(datetime.datetime.now().strftime("%H"))
         timeM = int(datetime.datetime.now().strftime("%M"))
 
-        if no_lectures == 1:
+        if int(no_lectures) == 1:
             if int(timeH) >= int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
                 if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
                     checkTiming()
@@ -247,7 +263,7 @@ def checkTiming():
                     zoomAttendMeeting(0, True)
                     status = False
 
-        elif no_lectures == 2:
+        elif int(no_lectures) == 2:
             if int(timeH) >= int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
                 if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
                     checkTiming()
@@ -270,7 +286,7 @@ def checkTiming():
                         zoomAttendMeeting(1, True)
                         status = False
 
-        elif no_lectures == 3:
+        elif int(no_lectures) == 3:
             if int(timeH) >= int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
                 if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
                     checkTiming()
@@ -302,7 +318,7 @@ def checkTiming():
                     else:
                         zoomAttendMeeting(2, True)
                         status = False
-        elif no_lectures == 4:
+        elif int(no_lectures) == 4:
             if int(timeH) >= int(meetingStart[0]) and int(timeM) >= int(meetingStart[1]):
                 if timeH >= int(meetingEnd[0]) and timeM >= int(meetingEnd[1]):
                     checkTiming()
